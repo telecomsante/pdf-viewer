@@ -46,12 +46,12 @@
   </head>
   <body>
     <div class="vertical-section-container centered">
-      <h3>Basic zdkelt-pdf-viewer demo</h3>
+      <h3>Basic pdf-viewer demo</h3>
       <p>Buttons, checkboxes and list are not part of the components</p>
       <demo-snippet>
         <template is="dom-bind" id="demo">
           <iron-ajax auto
-            url="/data/pdf.json"
+            url="../data/pdf.json"
             handle-as="json"
             last-response={{newspapers}}></iron-ajax>
           <array-selector id="selector" items="{{newspapers}}" selected-item="{{selectedPaper}}"></array-selector>
@@ -100,7 +100,7 @@
           <script>
           const demo = document.querySelector("#demo");
           const viewer = demo.$.viewer;
-          demo._selectedIndex = 0;
+          demo._selectedIndex = 3;
           demo.mode = 'single';
           demo._selectedChange = () => demo.$.selector.select(demo.newspapers[demo._selectedIndex]);
           demo.next = viewer.next.bind(viewer);
