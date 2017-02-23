@@ -13,8 +13,7 @@ Demo and doc are available on https://telecomsante.github.io/pdf-viewer/
 <custom-element-demo>
   <template>
     <script src="../webcomponentsjs/webcomponents-lite.js"></script>
-    <link rel="import" href="paper-fab.html">
-    <link rel="import" href="../iron-icons/iron-icons.html">
+    <link rel="import" href="pdf-viewer.html">
     <style is="custom-style">
       pdf-viewer {
         width: 80%;
