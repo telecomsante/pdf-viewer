@@ -37,5 +37,10 @@
     "paper-item": "PolymerElements/paper-item#^1.2.1",
     "iron-ajax": "PolymerElements/iron-ajax#^1.4.3",
     "paper-radio-group": "PolymerElements/paper-radio-group#^1.2.1"
-  }
+  },
+  "ignore": [
+    "node_modules",
+    "package.json",
+    ".babelrc"
+  ]
 }
