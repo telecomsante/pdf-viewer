@@ -51,7 +51,7 @@
       <demo-snippet>
         <template is="dom-bind" id="demo">
           <iron-ajax auto
-            url="/data/pdf.json"
+            url="../data/pdf.json"
             handle-as="json"
             last-response={{newspapers}}></iron-ajax>
           <array-selector id="selector" items="{{newspapers}}" selected-item="{{selectedPaper}}"></array-selector>
