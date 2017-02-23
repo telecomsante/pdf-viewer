@@ -1,0 +1,18 @@
+[
+  {
+    "label":"20 Minutes",
+    "edition":"20 Février 2017",
+    "url":"/data/20170220_PAR.pdf"
+  }, {
+    "label":"20 Minutes",
+    "edition":"21 Février 2017",
+    "url":"/data/20170221_PAR.pdf"
+  }, {
+    "label": "Web Content Accessibility Guidelines 1.0",
+    "edition": "",
+    "url": "https://www.w3.org/TR/WCAG10/wai-pageauth.pdf"
+  }, {
+    "label":"HTML 4.0 Specification",
+    "url": "https://www.w3.org/TR/1998/REC-html40-19980424/html40.pdf"
+  }
+]
