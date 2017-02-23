@@ -2,7 +2,7 @@
   "name": "pdf-viewer",
   "description": "A pdf viewer component",
   "license": "LICENSE.md",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "main": "pdf-viewer.html",
   "authors": [
     "Telecom Sante"
