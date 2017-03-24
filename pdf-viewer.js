@@ -292,7 +292,8 @@ Polymer({
   },
 
   _handleTrack(evt) {
-    getDiff = (evt) => {
+    let tmp;
+    let getDiff = (evt) => {
       return {
         x: this._trackPos.x - evt.detail.x,
         y: this._trackPos.y -  evt.detail.y,
