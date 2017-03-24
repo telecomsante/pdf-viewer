@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>pdf-viewer demo</title>
+
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+
+    <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+    <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+    <link rel="import" href="../../paper-fab/paper-fab.html">
+    <link rel="import" href="../../paper-tooltip/paper-tooltip.html">
+    <link rel="import" href="../../iron-ajax/iron-ajax.html">
+    <link rel="import" href="../../paper-dropdown-menu/paper-dropdown-menu.html">
+    <link rel="import" href="../../paper-radio-group/paper-radio-group.html">
+    <link rel="import" href="../../paper-radio-button/paper-radio-button.html">
+    <link rel="import" href="../../paper-listbox/paper-listbox.html">
+    <link rel="import" href="../../paper-item/paper-item.html">
+    <link rel="import" href="../pdf-viewer.es5.html">
+
+    <style is="custom-style" include="demo-pages-shared-styles">
+    .centered { max-width:80% }
+    pdf-viewer { height: 500px; }
+    footer {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+    }
+    paper-fab {
+      margin: 10px;
+      color: dimgray;
+      --paper-fab-background: rgb(203, 203, 203);
+    }
+    nav {
+      position: absolute;
+      bottom: 20px;
+      right: 10px;
+    }
+    paper-dropdown-menu {
+      width: 400px;
+    }
+    </style>
+  </head>
+  <body>
+    <div class="vertical-section-container centered">
+      <h3>Basic pdf-viewer demo</h3>
+      <p>Buttons, checkboxes and list are not part of the components</p>
+      <demo-snippet>
+        <template is="dom-bind" id="demo">
+          <iron-ajax auto
+            url="../data/pdf.json"
+            handle-as="json"
+            last-response={{newspapers}}></iron-ajax>
+          <array-selector id="selector" items="{{newspapers}}" selected-item="{{selectedPaper}}"></array-selector>
+          <div style="position:relative">
+            <pdf-viewer id="viewer"
+              initial-zoom="fit"
+              src="{{selectedPaper.url}}"
+              page="{{page}}"
+              pages="{{pages}}"
+              mode="{{mode}}"></pdf-viewer>
+            <footer>
+              <paper-fab mini icon="arrow-back" on-tap="previous"></paper-fab>
+              <div>{{page}}/[[pages]]</div>
+              <paper-fab mini icon="arrow-forward" on-tap="next"></paper-fab>
+            </footer>
+            <nav>
+              <div>
+                <paper-fab mini icon="fullscreen" on-tap="fitWidth"></paper-fab>
+                <paper-tooltip position="left">Fit page width</paper-tooltip>
+              </div>
+              <div>
+                <paper-fab mini icon="fullscreen-exit" on-tap="fit"></paper-fab>
+                <paper-tooltip position="left">Fit page</paper-tooltip>
+              </div>
+              <div>
+                <paper-fab mini icon="zoom-in" on-tap="zoomin"></paper-fab>
+                <paper-tooltip position="left">Zoom in</paper-tooltip>
+              </div>
+              <div>
+                <paper-fab mini icon="zoom-out" on-tap="zoomout"></paper-fab>
+                <paper-tooltip position="left">Zoom out</paper-tooltip>
+              </div>
+            </nav>
+          </div>
+          <paper-dropdown-menu label="Choose your newspaper">
+            <paper-listbox class="dropdown-content" selected="{{_selectedIndex}}" on-iron-select="_selectedChange">
+              <template is="dom-repeat" items={{newspapers}}>
+                <paper-item>{{item.label}} {{item.edition}}</paper-item>
+              </template>
+            </paper-listbox>
+          </paper-dropdown-menu>
+          <paper-radio-group selected="{{mode}}">
+            <paper-radio-button name="single">Single page</paper-radio-button>
+            <paper-radio-button name="double">Double page</paper-radio-button>
+          </paper-radio-group>
+          <script>
+          const demo = document.querySelector("#demo");
+          const viewer = demo.$.viewer;
+          demo._selectedIndex = 3;
+          demo.mode = 'single';
+          demo._selectedChange = () => demo.$.selector.select(demo.newspapers[demo._selectedIndex]);
+          demo.next = viewer.next.bind(viewer);
+          demo.previous = viewer.previous.bind(viewer);
+          demo.fitWidth = viewer.fitWidth.bind(viewer);
+          demo.fit = viewer.fit.bind(viewer);
+          demo.zoomin = viewer.zoomin.bind(viewer);
+          demo.zoomout = viewer.zoomout.bind(viewer);
+          </script>
+        </template>
+      </demo-snippet>
+    </div>
+  </body>
+</html>
