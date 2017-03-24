@@ -1,0 +1,57 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../paper-spinner/paper-spinner.html">
+<link rel="import" href="./pdfjs.html">
+<link rel="import" href="./resize-observer-polyfill.html">
+
+<!--
+`pdf-viewer`
+a pdf viewer component
+
+@demo demo/index.es5.html
+-->
+
+<dom-module id="pdf-viewer">
+  <template>
+    <style>
+      :host {
+        position:relative;
+        display: flex;
+        background: rgb(60, 60, 60);
+        flex-direction: column;
+      }
+      .container {
+        flex: 1;
+        overflow: hidden;
+        position:relative;
+      }
+      canvas {
+        display: block;
+        margin: 0;
+      }
+      canvas:first-of-type + canvas {
+        border-right: 1px solid lightgray;
+      }
+
+      paper-spinner {
+        position: absolute;
+        width: 100px;
+        height: 100px;
+        top: calc( 50% - 50px );
+        left: calc( 50% - 50px );
+      }
+      .viewer {
+        display: inline-flex;
+        box-sizing: border-box;
+      }
+    </style>
+    <div class="container" id="container" on-track="_handleTrack">
+      <div id="viewer" class="viewer">
+        <canvas id="viewer1" width="0" height="0"></canvas>
+        <canvas id="viewer2" width="0" height="0"></canvas>
+      </div>
+      <paper-spinner id="spinner" active></paper-spinner>
+    </div>
+  </template>
+
+  <script src="pdf-viewer.es5.js"></script>
+</dom-module>

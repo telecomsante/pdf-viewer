@@ -1,0 +1,76 @@
+{
+    "name": "resize-observer-polyfill",
+    "author": "Denis Rul <que.etc@gmail.com>",
+    "version": "1.4.1",
+    "description": "A polyfill for the Resize Observer API",
+    "main": "dist/ResizeObserver.js",
+    "jsnext:main": "dist/ResizeObserver.es.js",
+    "module": "dist/ResizeObserver.es.js",
+    "scripts": {
+        "build": "rollup -c",
+        "test": "npm run test:lint && npm run test:spec",
+        "test:lint": "node ./node_modules/eslint/bin/eslint.js \"**/*.js\" --ignore-pattern \"/dist/\"",
+        "test:spec": "npm run test:spec:ff && npm run test:spec:node",
+        "test:spec:ff": "karma start --browsers Firefox",
+        "test:spec:ch": "karma start --browsers Chrome",
+        "test:spec:ie": "karma start --browsers IE",
+        "test:spec:ie10": "karma start --browsers IE10",
+        "test:spec:node": "babel-node --presets latest,stage-2 tests/node/index.js",
+        "test:spec:all": "karma start --browsers Firefox,Chrome,IE,IE10 && npm run test:spec:node",
+        "test:spec:custom": "karma start --no-browsers",
+        "test:spec:native": "karma start --no-browsers --native"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/que-etc/resize-observer-polyfill.git"
+    },
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/que-etc/resize-observer-polyfill/issues"
+    },
+    "types": "index.d.ts",
+    "files": [
+        "src/",
+        "dist/",
+        "index.js",
+        "index.d.ts",
+        "index.global.js",
+        "index.global.d.ts"
+    ],
+    "keywords": [
+        "ResizeObserver",
+        "resize",
+        "observer",
+        "util",
+        "client",
+        "browser",
+        "polyfill",
+        "ponyfill"
+    ],
+    "homepage": "https://github.com/que-etc/resize-observer-polyfill",
+    "devDependencies": {
+        "babel-cli": "^6.23.0",
+        "babel-core": "^6.23.1",
+        "babel-eslint": "^7.1.1",
+        "babel-plugin-transform-regenerator": "^6.22.0",
+        "babel-preset-latest": "^6.22.0",
+        "babel-preset-stage-2": "^6.22.0",
+        "eslint": "^3.15.0",
+        "jasmine": "^2.5.3",
+        "jasmine-core": "^2.5.2",
+        "karma": "^1.4.1",
+        "karma-chrome-launcher": "^2.0.0",
+        "karma-firefox-launcher": "^1.0.0",
+        "karma-ie-launcher": "^1.0.0",
+        "karma-jasmine": "^1.1.0",
+        "karma-jasmine-html-reporter": "^0.2.2",
+        "karma-rollup-plugin": "^0.2.4",
+        "karma-sourcemap-loader": "^0.3.7",
+        "karma-spec-reporter": "0.0.26",
+        "promise-polyfill": "^6.0.2",
+        "regenerator-runtime": "^0.10.1",
+        "rollup": "^0.41.4",
+        "rollup-plugin-babel": "^2.7.1",
+        "rollup-plugin-buble": "^0.15.0"
+    }
+}
