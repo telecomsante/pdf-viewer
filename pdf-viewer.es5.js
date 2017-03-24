@@ -303,7 +303,8 @@ Polymer({
   _handleTrack: function _handleTrack(evt) {
     var _this7 = this;
 
-    getDiff = function getDiff(evt) {
+    var tmp = void 0;
+    var getDiff = function getDiff(evt) {
       return {
         x: _this7._trackPos.x - evt.detail.x,
         y: _this7._trackPos.y - evt.detail.y
