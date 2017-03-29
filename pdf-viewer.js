@@ -13,7 +13,7 @@ Polymer({
     },
 
     /**
-     * The pqge number to display
+     * The page number to display
      *
      * The first page is 1
      * @type {Number}
@@ -27,7 +27,7 @@ Polymer({
     },
 
     /**
-     * total number of pqges in the document
+     * total number of pages in the document
      * @type {Number}
      */
     pages: {
@@ -50,6 +50,16 @@ Polymer({
     initialZoom: {
       type: String,
       value: "fit",
+    },
+
+    /**
+     * The zoom value
+     * @type {Number}
+     */
+    zoom: {
+      type: Number,
+      value: 1,
+      observer: '_zoomChanged'
     },
 
     /**
@@ -99,11 +109,7 @@ Polymer({
     _pos: {
       type: Object,
       value: () => { return {x:0, y:0} },
-    },
-    _zoom: {
-      type: Number,
-      value: 1,
-    },
+    }
   },
 
   attached() {
@@ -142,6 +148,11 @@ Polymer({
     if(newValue > this.pages ) this.page = this.pages;
     if(newValue < 1) this.page = 1;
     if(this._PDF) this._drawPage();
+  },
+
+  _zoomChanged: function _zoomChanged(newValue, oldValue) {
+    if (!this.zoom) {this.zoom = 1;}
+    this.zoom = newValue;
   },
 
   _modeChanged(newValue, oldValue) {
@@ -188,9 +199,9 @@ Polymer({
     .then(page => {
       let viewport = page.getViewport(1);
       let rect = this.$.container.getBoundingClientRect();
-      this._zoom = (rect.width-20)/(this._views * viewport.width);
+      this.zoom = (rect.width-20)/(this._views * viewport.width);
       if(!this._firstRender) {
-        viewport = page.getViewport(this._zoom);
+        viewport = page.getViewport(this.zoom);
         this._pos.x = (rect.width - this._views * viewport.width) / 2;
         this._pos.y = 10;
         this.$.viewer.style.transform = `translate(${this._pos.x}px,${this._pos.y}px )`;
@@ -207,9 +218,9 @@ Polymer({
     .then(page => {
       let viewport = page.getViewport(1);
       let rect = this.$.container.getBoundingClientRect();
-      this._zoom = Math.min((rect.width-20)/this._views * viewport.width, (rect.height-20)/viewport.height);
+      this.zoom = Math.min((rect.width-20)/this._views * viewport.width, (rect.height-20)/viewport.height);
       if(!this._firstRender) {
-        viewport = page.getViewport(this._zoom);
+        viewport = page.getViewport(this.zoom);
         this._pos.x = (rect.width - this._views * viewport.width) / 2;
         this._pos.y = (rect.height - viewport.height) / 2;
         this.$.viewer.style.transform = `translate(${this._pos.x}px,${this._pos.y}px )`;
@@ -222,27 +233,23 @@ Polymer({
    * zoom in
    */
   zoomin() {
-    if(this._zoom * this.zoomRatio <= 11){
-      this._zoom = this._zoom * this.zoomRatio;
-      this._drawPage();
-    }
+    this.zoom = this.zoom * this.zoomRatio;
+    this._drawPage();
   },
 
   /**
    * zoom out
    */
   zoomout() {
-    if(this._zoom / this.zoomRatio >= 0.30){
-      this._zoom = this._zoom / this.zoomRatio;
-      this._drawPage();
-    }
+    this.zoom = this.zoom / this.zoomRatio;
+    this._drawPage();
   },
 
   _renderView(view, pg) {
     return new Promise( (resolve, reject) => {
       this._PDF.getPage(pg)
       .then( page => {
-        const viewport = page.getViewport(this._zoom);
+        const viewport = page.getViewport(this.zoom);
         view.width = viewport.width;
         view.height = viewport.height;
 
@@ -256,7 +263,7 @@ Polymer({
       .catch( (err) => {
         this._PDF.getPage(1)
           .then( page => {
-            const viewport = page.getViewport(this._zoom);
+            const viewport = page.getViewport(this.zoom);
             view.width = viewport.width;
             view.height = viewport.height
           })
