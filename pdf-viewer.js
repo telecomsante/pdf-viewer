@@ -222,16 +222,20 @@ Polymer({
    * zoom in
    */
   zoomin() {
-    this._zoom = this._zoom * this.zoomRatio;
-    this._drawPage();
+    if(this._zoom * this.zoomRatio <= 11){
+      this._zoom = this._zoom * this.zoomRatio;
+      this._drawPage();
+    }
   },
 
   /**
    * zoom out
    */
   zoomout() {
-    this._zoom = this._zoom / this.zoomRatio;
-    this._drawPage();
+    if(this._zoom / this.zoomRatio >= 0.30){
+      this._zoom = this._zoom / this.zoomRatio;
+      this._drawPage();
+    }
   },
 
   _renderView(view, pg) {
