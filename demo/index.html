@@ -25,6 +25,10 @@
   <link rel="import" href="../pdf-viewer.html">
 
   <style is="custom-style" include="demo-pages-shared-styles">
+    :root {
+      /* --paper-toast-background-color: tomato; */
+      --paper-fab-background: rgb(203, 203, 203);
+    }
     body {
       font-family: Roboto;
     }
@@ -46,7 +50,7 @@
     paper-fab {
       margin: 10px;
       color: dimgray;
-      --paper-fab-background: rgb(203, 203, 203);
+      
     }
 
     nav {
@@ -70,7 +74,9 @@
         <iron-ajax auto url="../data/pdf.json" handle-as="json" last-response={{newspapers}}></iron-ajax>
         <array-selector id="selector" items="{{newspapers}}" selected-item="{{selectedPaper}}"></array-selector>
         <div style="position:relative">
-          <pdf-viewer id="viewer" initial-zoom="fit" src="{{selectedPaper.url}}" page="{{page}}" pages="{{pages}}" mode="{{mode}}"></pdf-viewer>
+          <pdf-viewer id="viewer" initial-zoom="fit" src="{{selectedPaper.url}}" 
+               page="{{page}}" pages="{{pages}}" mode="{{mode}}"
+               error-message="Erreur lors du chargement" error-btn-label="Fermer"></pdf-viewer>
           <footer>
             <paper-fab mini icon="arrow-back" on-tap="previous"></paper-fab>
             <div>{{page}}/[[pages]]</div>
