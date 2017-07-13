@@ -71,8 +71,8 @@ a pdf viewer component
       </div>
       <paper-spinner id="spinner" active></paper-spinner>
     </div>
-    <paper-toast id="errorDlg" duration="0" text="{{errorMessage}}">
-      <paper-button on-tap="_closeDlg" class="yellow-btn">Close</paper-button>
+    <paper-toast id="errorDlg" duration="0" text="[[errorMessage]]">
+      <paper-button on-tap="_closeDlg" class="yellow-btn">[[errorBtnLabel]]</paper-button>
     </paper-toast>
   </template>
 
@@ -168,6 +168,11 @@ a pdf viewer component
           errorMessage: {
             type: String,
             value: "Error loading the pdf file"
+          },
+
+          errorBtnLabel: {
+            type: String,
+            value: "Close"
           },
 
           _views: {
