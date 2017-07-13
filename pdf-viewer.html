@@ -1,4 +1,5 @@
 <link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../polymer/lib/mixins/gesture-event-listeners.html">
 <link rel="import" href="../paper-spinner/paper-spinner.html">
 <link rel="import" href="./pdfjs.html">
 <link rel="import" href="./resize-observer-polyfill.html">
@@ -69,7 +70,7 @@ a pdf viewer component
      * @polymer
      * @demo demo/index.html
      */
-    class PdfViewer extends Polymer.Element {
+    class PdfViewer extends Polymer.GestureEventListeners(Polymer.Element) {
       static get is() {
         return 'pdf-viewer';
       }
