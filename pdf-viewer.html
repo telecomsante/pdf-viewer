@@ -1,6 +1,8 @@
 <link rel="import" href="../polymer/polymer-element.html">
 <link rel="import" href="../polymer/lib/mixins/gesture-event-listeners.html">
 <link rel="import" href="../paper-spinner/paper-spinner.html">
+<link rel="import" href="../paper-toast/paper-toast.html">
+<link rel="import" href="../paper-button/paper-button.html">
 <link rel="import" href="./pdfjs.html">
 <link rel="import" href="./resize-observer-polyfill.html">
 
@@ -8,6 +10,9 @@
 `pdf-viewer`
 a pdf viewer component
 
+![](demo.gif)
+
+@hero demo.gif
 @demo demo/index.html
 -->
 
@@ -17,8 +22,9 @@ a pdf viewer component
        :host {
         position: relative;
         display: flex;
-        background: rgb(60, 60, 60);
+        background: dimgray;
         flex-direction: column;
+        overflow: hidden;
       }
 
       .container {
@@ -32,7 +38,7 @@ a pdf viewer component
         margin: 0;
       }
 
-      canvas:first-of-type+canvas {
+      canvas:first-of-type {
         border-right: 1px solid lightgray;
       }
 
@@ -50,7 +56,12 @@ a pdf viewer component
       }
 
       [hidden] {
-        display:none;
+        display: none;
+      }
+
+      .yellow-btn {
+        text-transform: none;
+        color: #eeff41;
       }
     </style>
     <div class="container" id="container" on-track="_handleTrack">
@@ -60,7 +71,11 @@ a pdf viewer component
       </div>
       <paper-spinner id="spinner" active></paper-spinner>
     </div>
+    <paper-toast id="errorDlg" duration="0" text="{{errorMessage}}">
+      <paper-button on-tap="_closeDlg" class="yellow-btn">Close</paper-button>
+    </paper-toast>
   </template>
+
   <script>
     /**
      * `pdf-viewer`
@@ -87,7 +102,7 @@ a pdf viewer component
           },
 
           /**
-           * The pqge number to display
+           * The page number to display
            *
            * The first page is 1
            * @type {Number}
@@ -101,7 +116,7 @@ a pdf viewer component
           },
 
           /**
-           * total number of pqges in the document
+           * total number of pages in the document
            * @type {Number}
            */
           pages: {
@@ -116,8 +131,8 @@ a pdf viewer component
            * when the mode change
            *
            * the available values are :
-           *  - `fit` : whole page,
-           *  - `fit-width` : full width
+           *  - __fit__ : whole page,
+           *  - __fit-width__ : full width
            *
            * @type {String}
            */
@@ -139,8 +154,8 @@ a pdf viewer component
            * The view mode of the document
            *
            * the available values are :
-           *  - single : single page
-           *  - double : double page side by side
+           *  - __single__ : single page
+           *  - __double__ : double page side by side
            *
            * @type {String}
            */
@@ -148,6 +163,11 @@ a pdf viewer component
             type: String,
             value: "single",
             observer: '_modeChanged',
+          },
+
+          errorMessage: {
+            type: String,
+            value: "Error loading the pdf file"
           },
 
           _views: {
@@ -176,6 +196,7 @@ a pdf viewer component
             type: Boolean,
             value: false,
           },
+          
           _pos: {
             type: Object,
             value: () => {
@@ -194,7 +215,6 @@ a pdf viewer component
 
       attached() {
         this._ro = new ResizeObserver((entries, observer) => {
-          console.log('resize detect');
           if (this._firstRender) this._drawPage();
         });
         this._ro.observe(this);
@@ -205,10 +225,19 @@ a pdf viewer component
       }
 
       _srcChanged() {
+        if (this.$.errorDlg.opened) {
+          this.$.errorDlg.close()
+        }
+        this.$.spinner.active = true;
         this.firstRender = false;
         this.page = 1;
+        let src = this.src
         PDFJS.getDocument(this.src)
           .then(pdf => {
+            if(src !== this.src) { 
+              // fake cancel
+              return; 
+            }
             this._setPages(pdf.numPages);
             this._PDF = pdf;
             switch (this.initialZoom) {
@@ -218,7 +247,16 @@ a pdf viewer component
               default:
                 this.fit();
             }
-          });
+          })
+          .catch(err => {
+            this.$.errorDlg.fitInto = this.$.container;
+            this.$.errorDlg.open();
+            this.$.spinner.active = false;
+          })
+      }
+
+      _closeDlg() {
+        this.$.errorDlg.close()
       }
 
       _pageChanged(newValue, oldValue) {
@@ -434,5 +472,4 @@ a pdf viewer component
 
     window.customElements.define(PdfViewer.is, PdfViewer);
   </script>
-  <!-- <script src="pdf-viewer.js"></script> -->
 </dom-module>

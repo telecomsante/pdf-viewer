@@ -23,7 +23,9 @@
     "pdfjs-dist": "^1.7.310",
     "paper-styles": "PolymerElements/paper-styles#^2.0.0",
     "paper-spinner": "PolymerElements/paper-spinner#^2.0.0",
-    "resize-observer-polyfill": "^1.4.2"
+    "resize-observer-polyfill": "^1.4.2",
+    "paper-toast": "^2.0.0",
+    "paper-button": "^2.0.0"
   },
   "devDependencies": {
     "iron-icons": "PolymerElements/iron-icons#^2.0.1",
