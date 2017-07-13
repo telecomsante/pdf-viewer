@@ -14,5 +14,8 @@
   }, {
     "label":"HTML 4.0 Specification",
     "url": "https://www.w3.org/TR/1998/REC-html40-19980424/html40.pdf"
+  }, {
+    "label":"Fake",
+    "url": "/data/none"
   }
 ]

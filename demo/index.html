@@ -25,6 +25,9 @@
   <link rel="import" href="../pdf-viewer.html">
 
   <style is="custom-style" include="demo-pages-shared-styles">
+    body {
+      font-family: Roboto;
+    }
     .centered {
       max-width: 80%
     }
@@ -61,7 +64,7 @@
 <body>
   <div class="vertical-section-container centered">
     <h3>Basic pdf-viewer demo</h3>
-    <p>Buttons, checkboxes arnd list are not part of the components</p>
+    <p>Buttons, checkboxes and list are not part of the component</p>
     <dom-bind id="demo">
       <template>
         <iron-ajax auto url="../data/pdf.json" handle-as="json" last-response={{newspapers}}></iron-ajax>
@@ -116,7 +119,7 @@
             const selected = evt.target.items.indexOf(evt.target.selectedItems[0])
             demo.$.selector.select(demo.newspapers[selected])
           };
-          demo._selectedIndex = 3;
+          demo._selectedIndex = 1;
           demo.$.selector.select(demo.newspapers[demo._selectedIndex])
           demo.$.newspaperlist.addEventListener('iron-select', demo._selectedChange)
           demo.next = viewer.next.bind(viewer);
