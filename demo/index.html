@@ -113,9 +113,11 @@
           const viewer = demo.$.viewer;
           demo.mode = 'single';
           demo._selectedChange = (evt) => {
-            demo.$.selector.select(demo.newspapers[demo._selectedIndex])
+            const selected = evt.target.items.indexOf(evt.target.selectedItems[0])
+            demo.$.selector.select(demo.newspapers[selected])
           };
           demo._selectedIndex = 3;
+          demo.$.selector.select(demo.newspapers[demo._selectedIndex])
           demo.$.newspaperlist.addEventListener('iron-select', demo._selectedChange)
           demo.next = viewer.next.bind(viewer);
           demo.previous = viewer.previous.bind(viewer);
