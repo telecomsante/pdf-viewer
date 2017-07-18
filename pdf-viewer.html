@@ -110,7 +110,6 @@ a pdf viewer component
            */
           page: {
             type: Number,
-            value: 1,
             reflectToAttribute: true,
             notify: true,
             observer: '_pageChanged',
@@ -234,6 +233,8 @@ a pdf viewer component
         if (this.$.errorDlg.opened) {
           this.$.errorDlg.close()
         }
+        this.page = null;
+        this.pages = null;
         this.$.spinner.active = true;
         this.firstRender = false;
         this.page = 1;
@@ -266,9 +267,10 @@ a pdf viewer component
       }
 
       _pageChanged(newValue, oldValue) {
-        if (!this.pages) {
-          this.page = 1;
-        }
+        if(!newValue) return;
+        // if (!this.pages) {
+        //   this.page = 1;
+        // }
         if (newValue > this.pages) this.page = this.pages;
         if (newValue < 1) this.page = 1;
         if (this._PDF.pdfInfo) this._drawPage();
