@@ -99,6 +99,7 @@ a pdf viewer component
            */
           src: {
             type: String,
+            value: '',
             observer: '_srcChanged',
           },
 
@@ -165,6 +166,9 @@ a pdf viewer component
             observer: '_modeChanged',
           },
 
+          /**
+           * import error message for translation 
+           */
           errorMessage: {
             type: String,
             value: "Error loading the pdf file"
@@ -179,6 +183,10 @@ a pdf viewer component
             type: Number,
             value: 1,
           },
+
+          /**
+           * Internal PDF object
+           */
           _PDF: {
             type: Object,
             value: () => {
@@ -229,23 +237,43 @@ a pdf viewer component
         delete this._ro;
       }
 
-      _srcChanged() {
+      _showError(src) {
+        this.$.errorDlg.fitInto = this.$.container;
+        this.$.errorDlg.open();
+        this.$.spinner.active = false;
+        this.dispatchEvent(new CustomEvent('pdf-viewer-error',{detail: {src: src}}))
+      }
+
+      _srcChanged(newValue, oldValue) {
         if (this.$.errorDlg.opened) {
           this.$.errorDlg.close()
         }
+        if(!newValue || newValue === oldValue) return;
+        
         this.page = null;
-        this.pages = null;
+        this._setPages(null);
+
+        this.$.viewer2.hidden = true;
+        this.$.viewer1.hidden = true;
         this.$.spinner.active = true;
         this.firstRender = false;
-        this.page = 1;
-        let src = this.src
-        PDFJS.getDocument(this.src)
+        let src = newValue;
+
+        if(!navigator.onLine) { 
+          this._showError(src)
+          console.log('no network retry later')
+          return
+        }
+
+        PDFJS.getDocument(src)
           .then(pdf => {
             if(src !== this.src) { 
               // fake cancel
               return; 
             }
             this._setPages(pdf.numPages);
+            this.page = 1;
+            this.dispatchEvent(new CustomEvent('pdf-viewer-loaded',{detail: {src: src}}))
             this._PDF = pdf;
             switch (this.initialZoom) {
               case "fit-width":
@@ -256,9 +284,7 @@ a pdf viewer component
             }
           })
           .catch(err => {
-            this.$.errorDlg.fitInto = this.$.container;
-            this.$.errorDlg.open();
-            this.$.spinner.active = false;
+            this._showError(src);
           })
       }
 
@@ -268,9 +294,6 @@ a pdf viewer component
 
       _pageChanged(newValue, oldValue) {
         if(!newValue) return;
-        // if (!this.pages) {
-        //   this.page = 1;
-        // }
         if (newValue > this.pages) this.page = this.pages;
         if (newValue < 1) this.page = 1;
         if (this._PDF.pdfInfo) this._drawPage();
@@ -335,11 +358,12 @@ a pdf viewer component
        * display the whole page
        */
       fit() {
-        this._PDF.getPage(this.page)
+        const pageNum = this.page || 1;
+        this._PDF.getPage(pageNum)
           .then(page => {
             let viewport = page.getViewport(1);
             let rect = this.$.container.getBoundingClientRect();
-            this._zoom = Math.min((rect.width - 20) / this._views * viewport.width, (rect.height - 20) / viewport
+            this._zoom = Math.min((rect.width - 20) / (this._views * viewport.width), (rect.height - 20) / viewport
               .height);
             if (!this._firstRender) {
               viewport = page.getViewport(this._zoom);
@@ -347,6 +371,7 @@ a pdf viewer component
               this._pos.y = (rect.height - viewport.height) / 2;
               this.$.viewer.style.transform = `translate(${this._pos.x}px,${this._pos.y}px )`;
             }
+            this.page = pageNum;
             this._drawPage();
           })
       }
@@ -374,7 +399,6 @@ a pdf viewer component
               const viewport = page.getViewport(this._zoom);
               view.width = viewport.width;
               view.height = viewport.height;
-
               const context = view.getContext('2d');
               const renderContext = {
                 canvasContext: context,
@@ -404,9 +428,11 @@ a pdf viewer component
         this.$.spinner.active = true;
         const promises = [];
         if (this.mode === "single") {
+          this.$.viewer1.hidden = false;
           promises.push(this._renderView(this.$.viewer1, pg))
         } else {
-
+          this.$.viewer2.hidden = false;
+          this.$.viewer1.hidden = false;
           promises.push(this._renderView(this.$.viewer1, pg - pg % 2));
           promises.push(this._renderView(this.$.viewer2, pg - pg % 2 + 1));
         }
