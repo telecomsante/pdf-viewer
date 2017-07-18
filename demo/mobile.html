@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=no">
+
+  <title>pdf-viewer demo</title>
+
+  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+  <link rel="import" href="../pdf-viewer.html">
+  <style>
+    html, body {
+      height: 100vh;
+      width: 100vw;
+    }
+
+    body {
+      padding:0;
+      margin: 0;
+      display: flex;
+    }
+
+    pdf-viewer {
+      flex:1;
+    }
+  </style>
+</head>
+<body>
+  <pdf-viewer id="viewer" initial-zoom="fit" 
+              src="/data/20170220_PAR.pdf" 
+              mode="single"></pdf-viewer>
+</body>
+</html>
