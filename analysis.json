@@ -13,11 +13,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 98,
+              "line": 99,
               "column": 10
             },
             "end": {
-              "line": 101,
+              "line": 103,
               "column": 11
             }
           },
@@ -25,7 +25,8 @@
             "polymer": {
               "observer": "\"_srcChanged\""
             }
-          }
+          },
+          "defaultValue": "\"\""
         },
         {
           "name": "page",
@@ -34,11 +35,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 109,
+              "line": 111,
               "column": 10
             },
             "end": {
-              "line": 115,
+              "line": 116,
               "column": 11
             }
           },
@@ -47,8 +48,7 @@
               "notify": true,
               "observer": "\"_pageChanged\""
             }
-          },
-          "defaultValue": "1"
+          }
         },
         {
           "name": "pages",
@@ -57,11 +57,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 121,
+              "line": 122,
               "column": 10
             },
             "end": {
-              "line": 126,
+              "line": 127,
               "column": 11
             }
           },
@@ -79,11 +79,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 138,
+              "line": 139,
               "column": 10
             },
             "end": {
-              "line": 141,
+              "line": 142,
               "column": 11
             }
           },
@@ -99,11 +99,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 147,
+              "line": 148,
               "column": 10
             },
             "end": {
-              "line": 150,
+              "line": 151,
               "column": 11
             }
           },
@@ -119,11 +119,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 161,
+              "line": 162,
               "column": 10
             },
             "end": {
-              "line": 165,
+              "line": 166,
               "column": 11
             }
           },
@@ -137,15 +137,15 @@
         {
           "name": "errorMessage",
           "type": "string",
-          "description": "",
+          "description": "import error message for translation",
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 167,
+              "line": 171,
               "column": 10
             },
             "end": {
-              "line": 170,
+              "line": 174,
               "column": 11
             }
           },
@@ -155,17 +155,37 @@
           "defaultValue": "\"Error loading the pdf file\""
         },
         {
+          "name": "errorBtnLabel",
+          "type": "string",
+          "description": "",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 176,
+              "column": 10
+            },
+            "end": {
+              "line": 179,
+              "column": 11
+            }
+          },
+          "metadata": {
+            "polymer": {}
+          },
+          "defaultValue": "\"Close\""
+        },
+        {
           "name": "_views",
           "type": "number",
           "description": "",
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 172,
+              "line": 181,
               "column": 10
             },
             "end": {
-              "line": 175,
+              "line": 184,
               "column": 11
             }
           },
@@ -177,15 +197,15 @@
         {
           "name": "_PDF",
           "type": "Object",
-          "description": "",
+          "description": "Internal PDF object",
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 176,
+              "line": 189,
               "column": 10
             },
             "end": {
-              "line": 181,
+              "line": 194,
               "column": 11
             }
           },
@@ -201,11 +221,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 182,
+              "line": 195,
               "column": 10
             },
             "end": {
-              "line": 185,
+              "line": 198,
               "column": 11
             }
           },
@@ -221,11 +241,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 186,
+              "line": 199,
               "column": 10
             },
             "end": {
-              "line": 189,
+              "line": 202,
               "column": 11
             }
           },
@@ -241,11 +261,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 194,
+              "line": 207,
               "column": 10
             },
             "end": {
-              "line": 197,
+              "line": 210,
               "column": 11
             }
           },
@@ -261,11 +281,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 199,
+              "line": 212,
               "column": 10
             },
             "end": {
-              "line": 207,
+              "line": 220,
               "column": 11
             }
           },
@@ -280,11 +300,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 208,
+              "line": 221,
               "column": 10
             },
             "end": {
-              "line": 211,
+              "line": 224,
               "column": 11
             }
           },
@@ -301,11 +321,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 215,
+              "line": 228,
               "column": 6
             },
             "end": {
-              "line": 220,
+              "line": 233,
               "column": 7
             }
           },
@@ -318,16 +338,37 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 222,
+              "line": 235,
               "column": 6
             },
             "end": {
-              "line": 224,
+              "line": 237,
               "column": 7
             }
           },
           "metadata": {},
           "params": []
+        },
+        {
+          "name": "_showError",
+          "description": "",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 239,
+              "column": 6
+            },
+            "end": {
+              "line": 244,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "src"
+            }
+          ]
         },
         {
           "name": "_srcChanged",
@@ -335,16 +376,23 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 226,
+              "line": 246,
               "column": 6
             },
             "end": {
-              "line": 255,
+              "line": 288,
               "column": 7
             }
           },
           "metadata": {},
-          "params": []
+          "params": [
+            {
+              "name": "newValue"
+            },
+            {
+              "name": "oldValue"
+            }
+          ]
         },
         {
           "name": "_closeDlg",
@@ -352,11 +400,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 257,
+              "line": 290,
               "column": 6
             },
             "end": {
-              "line": 259,
+              "line": 292,
               "column": 7
             }
           },
@@ -369,11 +417,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 261,
+              "line": 294,
               "column": 6
             },
             "end": {
-              "line": 268,
+              "line": 299,
               "column": 7
             }
           },
@@ -393,11 +441,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 270,
+              "line": 301,
               "column": 6
             },
             "end": {
-              "line": 290,
+              "line": 321,
               "column": 7
             }
           },
@@ -417,11 +465,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 295,
+              "line": 326,
               "column": 6
             },
             "end": {
-              "line": 297,
+              "line": 328,
               "column": 7
             }
           },
@@ -434,11 +482,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 302,
+              "line": 333,
               "column": 6
             },
             "end": {
-              "line": 304,
+              "line": 335,
               "column": 7
             }
           },
@@ -451,11 +499,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 309,
+              "line": 340,
               "column": 6
             },
             "end": {
-              "line": 323,
+              "line": 354,
               "column": 7
             }
           },
@@ -468,11 +516,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 328,
+              "line": 359,
               "column": 6
             },
             "end": {
-              "line": 343,
+              "line": 376,
               "column": 7
             }
           },
@@ -485,11 +533,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 348,
+              "line": 381,
               "column": 6
             },
             "end": {
-              "line": 351,
+              "line": 384,
               "column": 7
             }
           },
@@ -502,11 +550,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 356,
+              "line": 389,
               "column": 6
             },
             "end": {
-              "line": 359,
+              "line": 392,
               "column": 7
             }
           },
@@ -519,11 +567,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 361,
+              "line": 394,
               "column": 6
             },
             "end": {
-              "line": 386,
+              "line": 418,
               "column": 7
             }
           },
@@ -543,11 +591,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 388,
+              "line": 420,
               "column": 6
             },
             "end": {
-              "line": 416,
+              "line": 450,
               "column": 7
             }
           },
@@ -559,16 +607,37 @@
           ]
         },
         {
+          "name": "_touchEvent",
+          "description": "manage mouse and touch events\n\nif touch events are available then authorize zooming by pinch",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 458,
+              "column": 6
+            },
+            "end": {
+              "line": 462,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "evt"
+            }
+          ]
+        },
+        {
           "name": "_handleTrack",
           "description": "",
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 418,
+              "line": 464,
               "column": 6
             },
             "end": {
-              "line": 444,
+              "line": 490,
               "column": 7
             }
           },
@@ -585,11 +654,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 446,
+              "line": 492,
               "column": 6
             },
             "end": {
-              "line": 468,
+              "line": 514,
               "column": 7
             }
           },
@@ -607,11 +676,11 @@
       "metadata": {},
       "sourceRange": {
         "start": {
-          "line": 87,
+          "line": 88,
           "column": 4
         },
         "end": {
-          "line": 470,
+          "line": 516,
           "column": 5
         }
       },
@@ -624,11 +693,11 @@
           "description": "url of the pdf file to display",
           "sourceRange": {
             "start": {
-              "line": 98,
+              "line": 99,
               "column": 10
             },
             "end": {
-              "line": 101,
+              "line": 103,
               "column": 11
             }
           },
@@ -640,11 +709,11 @@
           "description": "The page number to display\n\nThe first page is 1",
           "sourceRange": {
             "start": {
-              "line": 109,
+              "line": 111,
               "column": 10
             },
             "end": {
-              "line": 115,
+              "line": 116,
               "column": 11
             }
           },
@@ -656,11 +725,11 @@
           "description": "total number of pages in the document",
           "sourceRange": {
             "start": {
-              "line": 121,
+              "line": 122,
               "column": 10
             },
             "end": {
-              "line": 126,
+              "line": 127,
               "column": 11
             }
           },
@@ -672,11 +741,11 @@
           "description": "the initial zoom when opening a document and\nwhen the mode change\n\nthe available values are :\n - __fit__ : whole page,\n - __fit-width__ : full width",
           "sourceRange": {
             "start": {
-              "line": 138,
+              "line": 139,
               "column": 10
             },
             "end": {
-              "line": 141,
+              "line": 142,
               "column": 11
             }
           },
@@ -688,11 +757,11 @@
           "description": "The zoom ratio used",
           "sourceRange": {
             "start": {
-              "line": 147,
+              "line": 148,
               "column": 10
             },
             "end": {
-              "line": 150,
+              "line": 151,
               "column": 11
             }
           },
@@ -704,11 +773,11 @@
           "description": "The view mode of the document\n\nthe available values are :\n - __single__ : single page\n - __double__ : double page side by side",
           "sourceRange": {
             "start": {
-              "line": 161,
+              "line": 162,
               "column": 10
             },
             "end": {
-              "line": 165,
+              "line": 166,
               "column": 11
             }
           },
@@ -717,14 +786,30 @@
         },
         {
           "name": "error-message",
-          "description": "",
+          "description": "import error message for translation",
           "sourceRange": {
             "start": {
-              "line": 167,
+              "line": 171,
               "column": 10
             },
             "end": {
-              "line": 170,
+              "line": 174,
+              "column": 11
+            }
+          },
+          "metadata": {},
+          "type": "string"
+        },
+        {
+          "name": "error-btn-label",
+          "description": "",
+          "sourceRange": {
+            "start": {
+              "line": 176,
+              "column": 10
+            },
+            "end": {
+              "line": 179,
               "column": 11
             }
           },
@@ -752,6 +837,48 @@
       },
       "slots": [],
       "tagname": "pdf-viewer"
+    }
+  ],
+  "classes": [
+    {
+      "description": "",
+      "summary": "",
+      "path": "gesture-mixin.html",
+      "properties": [],
+      "methods": [
+        {
+          "name": "connectedCallback",
+          "description": "",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 8,
+              "column": 2
+            },
+            "end": {
+              "line": 11,
+              "column": 3
+            }
+          },
+          "metadata": {},
+          "params": []
+        }
+      ],
+      "staticMethods": [],
+      "demos": [],
+      "metadata": {},
+      "sourceRange": {
+        "start": {
+          "line": 1,
+          "column": 35
+        },
+        "end": {
+          "line": 12,
+          "column": 1
+        }
+      },
+      "privacy": "public",
+      "superclass": "superclass"
     }
   ]
 }
