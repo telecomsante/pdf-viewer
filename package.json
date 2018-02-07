@@ -1,6 +1,6 @@
 {
   "name": "pdf-viewer",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/telecomsante/pdf-viewer)",
   "main": "index.js",
   "directories": {
