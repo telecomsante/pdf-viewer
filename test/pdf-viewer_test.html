@@ -1,87 +1,91 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 
-    <title>pdf-viewer test</title>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 
-    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
-    <script src="../../web-component-tester/browser.js"></script>
+  <title>pdf-viewer test</title>
 
-    <link rel="import" href="../pdf-viewer.html">
-    <style>
-      pdf-viewer {
-        height:600px;
-      }
-    </style>
-  </head>
-  <body>
-    <test-fixture id="basic">
-      <template>
-        <pdf-viewer></pdf-viewer>
-      </template>
-    </test-fixture>
+  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+  <script src="../../web-component-tester/browser.js"></script>
 
-    <test-fixture id="newspaper">
-      <template>
-        <pdf-viewer src="../data/20170220_PAR.pdf"></pdf-viewer>
-      </template>
-    </test-fixture>
+  <link rel="import" href="../pdf-viewer.html">
+  <style>
+    pdf-viewer {
+      height: 600px;
+    }
 
-    <script>
-      suite('pdf-viewer', function() {
-        test('instantiating the element works', function() {
-          var element = fixture('basic');
-          assert.equal(element.src, '');
-          var elementShadowRoot = element.shadowRoot;
-          assert.equal(elementShadowRoot.querySelector('#spinner').active, true);
-        });
+  </style>
+</head>
 
-        test('loading a pdf', function(done) {
-          var element = fixture('newspaper');
-          const src = '../data/20170220_PAR.pdf';
-          element.addEventListener('pdf-viewer-loaded', (evt) => {
-            assert.equal(evt.detail.src, src);
-            assert.equal(element.pages, 24);
-            done();
-          });
-          assert.equal(element.src, src);
-          assert.equal(element.pages, undefined);
-          var elementShadowRoot = element.shadowRoot;
-          assert.equal(elementShadowRoot.querySelector('#spinner').active, true);
-        });
+<body>
+  <test-fixture id="basic">
+    <template>
+      <pdf-viewer></pdf-viewer>
+    </template>
+  </test-fixture>
 
-        test('error when loading a fake pdf', function(done) {
-          var element = fixture('basic');
-          const src = '../data/fake.pdf';
-          element.src = src;
-          element.addEventListener('pdf-viewer-error', (evt) => {
-            assert.equal(evt.detail.src, src);
-            assert.equal(element.pages, undefined);
-            assert.equal(element.page, undefined);
-            done();
-          });
-          assert.equal(element.src, src);
-          var elementShadowRoot = element.shadowRoot;
-          assert.equal(elementShadowRoot.querySelector('#spinner').active, true);
-        });
+  <test-fixture id="newspaper">
+    <template>
+      <pdf-viewer src="../data/20170220_PAR.pdf"></pdf-viewer>
+    </template>
+  </test-fixture>
 
-        test('loading a fat pdf', function(done) {
-          var element = fixture('basic');
-          const src = 'https://www.w3.org/TR/1998/REC-html40-19980424/html40.pdf';
-          element.src = src;
-          element.addEventListener('pdf-viewer-loaded', (evt) => {
-            assert.equal(evt.detail.src, src);
-            assert.equal(element.pages, 367);
-            assert.equal(element.page, 1);
-            done();
-          });
-          assert.equal(element.src, src);
-          var elementShadowRoot = element.shadowRoot;
-          assert.equal(elementShadowRoot.querySelector('#spinner').active, true);
-        });
-      });
-    </script>
-  </body>
+  <script>
+    suite('pdf-viewer', function () {
+      test('instantiating the element works', function () {
+        var element = fixture('basic')
+        assert.equal(element.src, '')
+        var elementShadowRoot = element.shadowRoot
+        assert.equal(elementShadowRoot.querySelector('#spinner').active, true)
+      })
+
+      test('loading a pdf', function (done) {
+        var element = fixture('newspaper')
+        const src = '../data/20170220_PAR.pdf'
+        element.addEventListener('pdf-viewer-loaded', (evt) => {
+          assert.equal(evt.detail.src, src)
+          assert.equal(element.pages, 24)
+          done()
+        })
+        assert.equal(element.src, src)
+        assert.equal(element.pages, undefined)
+        var elementShadowRoot = element.shadowRoot
+        assert.equal(elementShadowRoot.querySelector('#spinner').active, true)
+      })
+
+      test('error when loading a fake pdf', function (done) {
+        var element = fixture('basic')
+        const src = '../data/fake.pdf'
+        element.src = src
+        element.addEventListener('pdf-viewer-error', (evt) => {
+          assert.equal(evt.detail.src, src)
+          assert.equal(element.pages, undefined)
+          assert.equal(element.page, undefined)
+          done()
+        })
+        assert.equal(element.src, src)
+        var elementShadowRoot = element.shadowRoot
+        assert.equal(elementShadowRoot.querySelector('#spinner').active, true)
+      })
+
+      test('loading a fat pdf', function (done) {
+        var element = fixture('basic')
+        const src = 'https://www.w3.org/TR/1998/REC-html40-19980424/html40.pdf'
+        element.src = src
+        element.addEventListener('pdf-viewer-loaded', (evt) => {
+          assert.equal(evt.detail.src, src)
+          assert.equal(element.pages, 367)
+          assert.equal(element.page, 1)
+          done()
+        })
+        assert.equal(element.src, src)
+        var elementShadowRoot = element.shadowRoot
+        assert.equal(elementShadowRoot.querySelector('#spinner').active, true)
+      })
+    })
+  </script>
+</body>
+
 </html>

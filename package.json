@@ -1,0 +1,39 @@
+{
+  "name": "pdf-viewer",
+  "version": "1.0.0",
+  "description": "[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/telecomsante/pdf-viewer)",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "postinstall": "bower install",
+    "start": "polymer serve -H 0.0.0.0",
+    "test": "polymer test",
+    "lint": "npm run lint:javascript && polymer lint",
+    "lint:javascript": "eslint . --ext js,html --ignore-path .gitignore",
+    "doc": "polymer analyze > analysis.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/telecomsante/pdf-viewer.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/telecomsante/pdf-viewer/issues"
+  },
+  "homepage": "https://github.com/telecomsante/pdf-viewer#readme",
+  "devDependencies": {
+    "bower": "^1.8.2",
+    "eslint": "^4.17.0",
+    "eslint-config-standard": "^11.0.0-beta.0",
+    "eslint-plugin-html": "^4.0.2",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-node": "^6.0.0",
+    "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "polymer-cli": "^1.6.0"
+  }
+}

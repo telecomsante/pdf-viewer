@@ -118,22 +118,22 @@
       </template>
     </dom-bind>
     <script>
-          const demo = document.querySelector("#demo");
-          const viewer = demo.$.viewer;
-          demo.mode = 'single';
+          const demo = document.querySelector('#demo')
+          const viewer = demo.$.viewer
+          demo.mode = 'single'
           demo._selectedChange = (evt) => {
             const selected = evt.target.items.indexOf(evt.target.selectedItems[0])
             demo.$.selector.select(demo.newspapers[selected])
-          };
-          demo._selectedIndex = 1;
+          }
+          demo._selectedIndex = 1
           demo.$.selector.select(demo.newspapers[demo._selectedIndex])
           demo.$.newspaperlist.addEventListener('iron-select', demo._selectedChange)
-          demo.next = viewer.next.bind(viewer);
-          demo.previous = viewer.previous.bind(viewer);
-          demo.fitWidth = viewer.fitWidth.bind(viewer);
-          demo.fit = viewer.fit.bind(viewer);
-          demo.zoomin = viewer.zoomin.bind(viewer);
-          demo.zoomout = viewer.zoomout.bind(viewer);
+          demo.next = viewer.next.bind(viewer)
+          demo.previous = viewer.previous.bind(viewer)
+          demo.fitWidth = viewer.fitWidth.bind(viewer)
+          demo.fit = viewer.fit.bind(viewer)
+          demo.zoomin = viewer.zoomin.bind(viewer)
+          demo.zoomout = viewer.zoomout.bind(viewer)
         </script>
   </div>
 </body>
