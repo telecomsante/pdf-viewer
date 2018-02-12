@@ -93,6 +93,14 @@ a pdf viewer component
       static get properties() {
         return {
           /**
+          * Path to the PDFJS worker script
+          */
+          PDFJS_workerSrc: {
+            type: String,
+            value: "/bower_components/pdfjs-dist/build/pdf.worker.min.js",
+          },
+
+          /**
            * url of the pdf file to display
            * @type {String}
            */
@@ -267,6 +275,8 @@ a pdf viewer component
           console.log('no network retry later')
           return
         }
+
+        PDFJS.workerSrc = this.PDFJS_workerSrc
 
         PDFJS.getDocument(src)
           .then(pdf => {
