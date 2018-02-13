@@ -1,3 +1,11 @@
+## 2.0.1
+
+ - add a property to declare the PDFJS worker script
+ - update doc 
+
+## 2.0.0
+
+ - update to polymer 2.x
 
 ## 1.0.1
 
