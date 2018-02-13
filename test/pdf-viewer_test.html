@@ -72,7 +72,7 @@
 
       test('loading a fat pdf', function (done) {
         var element = fixture('basic')
-        const src = 'https://www.w3.org/TR/1998/REC-html40-19980424/html40.pdf'
+        const src = '/data/html40.pdf'
         element.src = src
         element.addEventListener('pdf-viewer-loaded', (evt) => {
           assert.equal(evt.detail.src, src)
