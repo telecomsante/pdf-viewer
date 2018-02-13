@@ -22,4 +22,10 @@ Basic usage :
   page="5"></pdf-viewer>
 ```
 
+# Using in polymer app
+
+the file `bower_components/pdfjs-dist/build/pdf.worker.min.js` must be added to `extradependencies` section into the `polymer.json` file.
+
+If for some reasons, bower components are installed in another folder, be aware to pass as attribute `PDFJS_workerSrc` the full path to the `pdf.worker.min.js` file.
+
 The component is licensed under the [ISC License](LICENSE.md)
