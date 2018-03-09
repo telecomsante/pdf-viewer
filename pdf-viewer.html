@@ -3,8 +3,8 @@
 <link rel="import" href="../paper-spinner/paper-spinner.html">
 <link rel="import" href="../paper-toast/paper-toast.html">
 <link rel="import" href="../paper-button/paper-button.html">
+<link rel="import" href="../iron-resizable-behavior/iron-resizable-behavior.html">
 <link rel="import" href="./pdfjs.html">
-<link rel="import" href="./resize-observer-polyfill.html">
 
 <!--
 `pdf-viewer`
@@ -77,6 +77,7 @@ a pdf viewer component
   </template>
 
   <script>
+    /* global pdfjsDistBuildPdf */
     /**
      * `pdf-viewer`
      *
@@ -86,7 +87,7 @@ a pdf viewer component
      * @polymer
      * @demo demo/index.html
      */
-    class PdfViewer extends Polymer.GestureEventListeners(Polymer.Element) {
+    class PdfViewer extends Polymer.mixinBehaviors([Polymer.IronResizableBehavior, Polymer.GestureEventListeners], Polymer.Element) {
       static get is() {
         return 'pdf-viewer'
       }
@@ -223,13 +224,9 @@ a pdf viewer component
 
           _pos: {
             type: Object,
-            value: () => {
-              return {
-                x: 0,
-                y: 0,
-              }
-            },
+            value: () => ({ x: 0, y: 0 }),
           },
+
           _zoom: {
             type: Number,
             value: 1,
@@ -237,15 +234,15 @@ a pdf viewer component
         }
       }
 
-      attached() {
-        this._ro = new ResizeObserver((entries, observer) => {
-          if (this._firstRender) this._drawPage()
-        })
-        this._ro.observe(this)
+      constructor() {
+        super()
+        this.PDFJS = pdfjsDistBuildPdf
+        this.PDFJS.GlobalWorkerOptions.workerSrc = this.PDFJS_workerSrc
       }
 
-      detached() {
-        delete this._ro
+      connectedCallback() {
+        super.connectedCallback()
+        this.addEventListener('iron-resize', this._drawPage)
       }
 
       _showError(src) {
@@ -253,9 +250,7 @@ a pdf viewer component
         this.$.errorDlg.open()
         this.$.spinner.active = false
         this.dispatchEvent(new CustomEvent('pdf-viewer-error', {
-          detail: {
-            src: src,
-          },
+          detail: { src: src },
         }))
       }
 
@@ -280,9 +275,7 @@ a pdf viewer component
           return
         }
 
-        PDFJS.workerSrc = this.PDFJS_workerSrc
-
-        PDFJS.getDocument(src)
+        this.PDFJS.getDocument(src)
           .then(pdf => {
             if (src !== this.src) {
               // fake cancel
@@ -291,9 +284,7 @@ a pdf viewer component
             this._setPages(pdf.numPages)
             this.page = 1
             this.dispatchEvent(new CustomEvent('pdf-viewer-loaded', {
-              detail: {
-                src: src,
-              },
+              detail: { src: src },
             }))
             this._PDF = pdf
             switch (this.initialZoom) {
@@ -439,7 +430,7 @@ a pdf viewer component
       }
 
       _drawPage(pg) {
-        if (!pg) pg = this.page
+        if (!pg || isNaN(pg)) pg = this.page
         if (this._pageRendering) {
           this._pageNumPending = pg
           return

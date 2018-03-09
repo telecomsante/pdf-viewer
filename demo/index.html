@@ -29,9 +29,11 @@
       /* --paper-toast-background-color: tomato; */
       --paper-fab-background: rgb(203, 203, 203);
     }
+
     body {
       font-family: Roboto;
     }
+
     .centered {
       max-width: 80%
     }
@@ -50,7 +52,6 @@
     paper-fab {
       margin: 10px;
       color: dimgray;
-      
     }
 
     nav {
@@ -62,6 +63,7 @@
     paper-dropdown-menu {
       width: 400px;
     }
+
   </style>
 </head>
 
@@ -74,9 +76,14 @@
         <iron-ajax auto url="../data/pdf.json" handle-as="json" last-response={{newspapers}}></iron-ajax>
         <array-selector id="selector" items="{{newspapers}}" selected-item="{{selectedPaper}}"></array-selector>
         <div style="position:relative">
-          <pdf-viewer id="viewer" initial-zoom="fit" src="{{selectedPaper.url}}" 
-               page="{{page}}" pages="{{pages}}" mode="{{mode}}"
-               error-message="Erreur lors du chargement" error-btn-label="Fermer"></pdf-viewer>
+          <pdf-viewer id="viewer" 
+            initial-zoom="fit" 
+            src="{{selectedPaper.url}}" 
+            page="{{page}}" 
+            pages="{{pages}}" 
+            mode="{{mode}}"
+            error-message="Erreur lors du chargement" 
+            error-btn-label="Fermer"></pdf-viewer>
           <footer>
             <paper-fab mini icon="arrow-back" on-tap="previous"></paper-fab>
             <div>{{page}}/[[pages]]</div>
@@ -102,11 +109,11 @@
           </nav>
         </div>
         <paper-dropdown-menu label="Choose your newspaper">
-          <paper-listbox id="newspaperlist" slot="dropdown-content" class="dropdown-content" selected="{{_selectedIndex}}" >
+          <paper-listbox id="newspaperlist" slot="dropdown-content" class="dropdown-content" selected="{{_selectedIndex}}">
             <dom-repeat items={{newspapers}}>
-            <template >
-              <paper-item>{{item.label}} {{item.edition}}</paper-item>
-            </template>
+              <template>
+                <paper-item>{{item.label}} {{item.edition}}</paper-item>
+              </template>
             </dom-repeat>
           </paper-listbox>
         </paper-dropdown-menu>
@@ -114,27 +121,27 @@
           <paper-radio-button name="single">Single page</paper-radio-button>
           <paper-radio-button name="double">Double page</paper-radio-button>
         </paper-radio-group>
-        
+
       </template>
     </dom-bind>
     <script>
-          const demo = document.querySelector('#demo')
-          const viewer = demo.$.viewer
-          demo.mode = 'single'
-          demo._selectedChange = (evt) => {
-            const selected = evt.target.items.indexOf(evt.target.selectedItems[0])
-            demo.$.selector.select(demo.newspapers[selected])
-          }
-          demo._selectedIndex = 1
-          demo.$.selector.select(demo.newspapers[demo._selectedIndex])
-          demo.$.newspaperlist.addEventListener('iron-select', demo._selectedChange)
-          demo.next = viewer.next.bind(viewer)
-          demo.previous = viewer.previous.bind(viewer)
-          demo.fitWidth = viewer.fitWidth.bind(viewer)
-          demo.fit = viewer.fit.bind(viewer)
-          demo.zoomin = viewer.zoomin.bind(viewer)
-          demo.zoomout = viewer.zoomout.bind(viewer)
-        </script>
+      const demo = document.querySelector('#demo')
+      const viewer = demo.$.viewer
+      demo.mode = 'single'
+      demo._selectedChange = (evt) => {
+        const selected = evt.target.items.indexOf(evt.target.selectedItems[0])
+        demo.$.selector.select(demo.newspapers[selected])
+      }
+      demo._selectedIndex = 1
+      demo.$.selector.select(demo.newspapers[demo._selectedIndex])
+      demo.$.newspaperlist.addEventListener('iron-select', demo._selectedChange)
+      demo.next = viewer.next.bind(viewer)
+      demo.previous = viewer.previous.bind(viewer)
+      demo.fitWidth = viewer.fitWidth.bind(viewer)
+      demo.fit = viewer.fit.bind(viewer)
+      demo.zoomin = viewer.zoomin.bind(viewer)
+      demo.zoomout = viewer.zoomout.bind(viewer)
+    </script>
   </div>
 </body>
 

@@ -3,12 +3,18 @@
 
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=no">
+  <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1, initial-scale=1, user-scalable=no">
 
   <title>pdf-viewer demo</title>
 
+  <!-- Add to homescreen for Safari on iOS -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="pdf viewer">
+
   <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
-  <link rel="import" href="../pdf-viewer.html">
+  <link rel="import" href="x-pdf.html">
+
   <style>
     html, body {
       height: 100vh;
@@ -19,16 +25,15 @@
       padding:0;
       margin: 0;
       display: flex;
+      flex-direction: column;
     }
 
-    pdf-viewer {
+    x-pdf {
       flex:1;
     }
   </style>
 </head>
 <body>
-  <pdf-viewer id="viewer" initial-zoom="fit" 
-              src="/data/20170220_PAR.pdf" 
-              mode="single"></pdf-viewer>
+  <x-pdf></x-pdf>
 </body>
 </html>

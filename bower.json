@@ -19,12 +19,12 @@
   },
   "dependencies": {
     "polymer": "Polymer/polymer#^2.0.0",
-    "pdfjs-dist": "^1.7.310",
+    "pdfjs-dist": "2.0.426",
     "paper-styles": "PolymerElements/paper-styles#^2.0.0",
     "paper-spinner": "PolymerElements/paper-spinner#^2.0.0",
-    "resize-observer-polyfill": "^1.4.2",
     "paper-toast": "^2.0.0",
-    "paper-button": "^2.0.0"
+    "paper-button": "^2.0.0",
+    "iron-resizable-behavior": "PolymerElements/iron-resizable-behavior#^2.1.0"
   },
   "devDependencies": {
     "web-component-tester": "Polymer/web-component-tester#^6.0.0",
@@ -39,9 +39,6 @@
     "paper-radio-group": "PolymerElements/paper-radio-group#^2.0.0",
     "paper-listbox": "PolymerElements/paper-listbox#^2.0.0",
     "paper-item": "PolymerElements/paper-item#^2.0.0"
-  },
-  "resolutions": {
-    "polymer": "^2.0.1"
   },
   "ignore": []
 }
