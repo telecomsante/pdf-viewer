@@ -33,15 +33,15 @@
   </test-fixture>
 
   <script>
-    suite('pdf-viewer', function () {
-      test('instantiating the element works', function () {
+    describe('pdf-viewer', () => {
+      it('instantiating the element works', () => {
         var element = fixture('basic')
         assert.equal(element.src, '')
         var elementShadowRoot = element.shadowRoot
         assert.equal(elementShadowRoot.querySelector('#spinner').active, true)
       })
 
-      test('loading a pdf', function (done) {
+      it('loading a pdf', function (done) {
         var element = fixture('newspaper')
         const src = '../data/20170220_PAR.pdf'
         element.addEventListener('pdf-viewer-loaded', (evt) => {
@@ -55,7 +55,7 @@
         assert.equal(elementShadowRoot.querySelector('#spinner').active, true)
       })
 
-      test('error when loading a fake pdf', function (done) {
+      it('error when loading a fake pdf', function (done) {
         var element = fixture('basic')
         const src = '../data/fake.pdf'
         element.src = src
@@ -70,7 +70,7 @@
         assert.equal(elementShadowRoot.querySelector('#spinner').active, true)
       })
 
-      test('loading a fat pdf', function (done) {
+      it('loading a fat pdf', function (done) {
         var element = fixture('basic')
         const src = '/data/html40.pdf'
         element.src = src
