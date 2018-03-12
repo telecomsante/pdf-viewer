@@ -231,6 +231,11 @@ a pdf viewer component
             type: Number,
             value: 1,
           },
+
+          _loaded: {
+            type: Boolean,
+            value: false,
+          },
         }
       }
 
@@ -245,6 +250,10 @@ a pdf viewer component
         this.addEventListener('iron-resize', this._drawPage)
       }
 
+      /**
+       * @event pdf-viewer-error Fired when the download of the pdf failed.
+       * @param {string} src the source string of the pdf.
+       */
       _showError(src) {
         this.$.errorDlg.fitInto = this.$.container
         this.$.errorDlg.open()
@@ -254,12 +263,16 @@ a pdf viewer component
         }))
       }
 
+      /**
+       * @event pdf-viewer-loaded Fired when the download of the pdf succeed.
+       * @param {string} src the source string of the pdf.
+       */
       _srcChanged(newValue, oldValue) {
         if (this.$.errorDlg.opened) {
           this.$.errorDlg.close()
         }
         if (!newValue || newValue === oldValue) return
-
+        this.loaded = false
         this.page = null
         this._setPages(null)
 
@@ -271,7 +284,6 @@ a pdf viewer component
 
         if (!navigator.onLine) {
           this._showError(src)
-          console.log('no network retry later')
           return
         }
 
@@ -281,6 +293,7 @@ a pdf viewer component
               // fake cancel
               return
             }
+            this.loaded = true
             this._setPages(pdf.numPages)
             this.page = 1
             this.dispatchEvent(new CustomEvent('pdf-viewer-loaded', {
@@ -334,17 +347,31 @@ a pdf viewer component
       }
 
       /**
+       * @event pdf-viewer-outrange Fired when trying to render a non existing page.
+       */
+
+      /**
        * move to the next page
        */
       next() {
-        if (this.page < this.pages) this.page += this._views
+        if (this.page < this.pages) {
+          this.page += this._views
+        } else {
+          const event = new CustomEvent('pdf-viewer-outrange')
+          this.dispatchEvent(event)
+        }
       }
 
       /**
        * move to the previous page
        */
       previous() {
-        if (this.page > 1) this.page -= this._views
+        if (this.page > 1) {
+          this.page -= this._views
+        } else {
+          const event = new CustomEvent('pdf-viewer-outrange')
+          this.dispatchEvent(event)
+        }
       }
 
       /**
@@ -404,8 +431,11 @@ a pdf viewer component
       }
 
       _renderView(view, pg) {
+        if (!this.loaded) return
+
         return new Promise((resolve, reject) => {
           this._PDF.getPage(pg)
+            .catch((e) => this._PDF.getPage(1))
             .then(page => {
               const viewport = page.getViewport(this._zoom)
               view.width = viewport.width
@@ -417,18 +447,13 @@ a pdf viewer component
               }
               resolve(page.render(renderContext))
             })
-            .catch((e) => {
-              this._PDF.getPage(1)
-                .then(page => {
-                  const viewport = page.getViewport(this._zoom)
-                  view.width = viewport.width
-                  view.height = viewport.height
-                })
-                .then(resolve)
-            })
         })
       }
 
+      /**
+       * @event pdf-viewer-render Fired when a page have been rendered.
+       * @param {string} page the endered page number.
+       */
       _drawPage(pg) {
         if (!pg || isNaN(pg)) pg = this.page
         if (this._pageRendering) {
@@ -458,6 +483,10 @@ a pdf viewer component
               this._drawPage(this._pageNumPending)
               this._pageNumPending = null
             }
+          })
+          .then(() => {
+            const event = new CustomEvent('pdf-viewer-render', { detail: { page: this.page } })
+            this.dispatchEvent(event)
           })
       }
 
