@@ -9,6 +9,7 @@
 
   <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
 
+  <link rel="import" href="../../web-animations-js/web-animations-next.min.html">
   <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
   <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
   <link rel="import" href="../../iron-icons/iron-icons.html">
@@ -124,6 +125,7 @@
                   const selected = evt.target.items.indexOf(evt.target.selectedItems[0])
                   demo.$.selector.select(demo.newspapers[selected])
                 }
+
                 demo.getNewspapers = (evt) => {
                   demo._selectedIndex = 1
                   demo.$.selector.items = evt.detail.value
