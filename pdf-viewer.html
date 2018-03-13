@@ -318,7 +318,7 @@ a pdf viewer component
       }
 
       _pageChanged(newValue, oldValue) {
-        if (!newValue) return
+        if (!newValue && newValue !== 0) return
         if (newValue > this.pages) this.page = this.pages
         if (newValue < 1) this.page = 1
         if (this._PDF.pdfInfo) this._drawPage()
@@ -356,6 +356,7 @@ a pdf viewer component
       next() {
         if (this.page < this.pages) {
           this.page += this._views
+          if (this.page > this.pages) this.page = this.pages
         } else {
           const event = new CustomEvent('pdf-viewer-outrange')
           this.dispatchEvent(event)
@@ -368,6 +369,7 @@ a pdf viewer component
       previous() {
         if (this.page > 1) {
           this.page -= this._views
+          if (this.page === 0) this.page = 1
         } else {
           const event = new CustomEvent('pdf-viewer-outrange')
           this.dispatchEvent(event)
