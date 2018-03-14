@@ -1,3 +1,11 @@
+## 2.1.0
+
+ - update to PDFjs 2.0.426
+ - adds events :
+   - pdf-viewer-outrange: when trying to display a page that doesn't exist
+   - pdf-viewer-render: when the page has been rendered
+ - fix : this._PDF.getPage is not a function
+
 ## 2.0.1
 
  - add a property to declare the PDFJS worker script
