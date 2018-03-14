@@ -9,7 +9,7 @@
   "scripts": {
     "postinstall": "bower install",
     "start": "polymer serve -H 0.0.0.0",
-    "test": "polymer test",
+    "test": "polymer test -l chrome; polymer test -l safari; polymer test -l firefox",
     "lint": "npm run lint:javascript && polymer lint",
     "lint:javascript": "eslint . --ext js,html --ignore-path .gitignore",
     "doc": "polymer analyze > analysis.json"
@@ -27,12 +27,12 @@
   "homepage": "https://github.com/telecomsante/pdf-viewer#readme",
   "devDependencies": {
     "bower": "^1.8.2",
-    "eslint": "^4.17.0",
-    "eslint-config-standard": "^11.0.0-beta.0",
+    "eslint": "^4.18.2",
+    "eslint-config-standard": "^11.0.0",
     "eslint-plugin-html": "^4.0.2",
-    "eslint-plugin-import": "^2.8.0",
-    "eslint-plugin-node": "^6.0.0",
-    "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-import": "^2.9.0",
+    "eslint-plugin-node": "^6.0.1",
+    "eslint-plugin-promise": "^3.7.0",
     "eslint-plugin-standard": "^3.0.1",
     "polymer-cli": "^1.6.0"
   }

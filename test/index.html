@@ -6,12 +6,10 @@
     <script src="../bower_components/web-component-tester/browser.js"></script>
   </head>
   <body>
-    <style>
-      #subsuites { min-width: 900px }
-    </style>
     <script>
       WCT.loadSuites([
-        'pdf-viewer_test.html',
+        'pdf-viewer_test.html?dom=shadow',
+        'pdf-viewer_test.html?wc-shadydom=true',
       ])
     </script>
   </body>
