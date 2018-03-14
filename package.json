@@ -9,7 +9,7 @@
   "scripts": {
     "postinstall": "bower install",
     "start": "polymer serve -H 0.0.0.0",
-    "test": "polymer test",
+    "test": "polymer test -l chrome; polymer test -l safari; polymer test -l firefox",
     "lint": "npm run lint:javascript && polymer lint",
     "lint:javascript": "eslint . --ext js,html --ignore-path .gitignore",
     "doc": "polymer analyze > analysis.json"
