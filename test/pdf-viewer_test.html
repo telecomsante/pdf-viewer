@@ -38,48 +38,50 @@
         var element = fixture('basic')
         assert.equal(element.src, '')
         var elementShadowRoot = element.shadowRoot
-        assert.equal(elementShadowRoot.querySelector('#spinner').active, true)
+        assert.equal(elementShadowRoot.querySelector('#spinner').active, false)
       })
 
       it('loading a pdf', function (done) {
-        var element = fixture('newspaper')
-        const src = '../data/20170220_PAR.pdf'
+        this.timeout(30000)
+        var element = fixture('basic')
         element.addEventListener('pdf-viewer-loaded', (evt) => {
           assert.equal(evt.detail.src, src)
           assert.equal(element.pages, 24)
           done()
         })
-        assert.equal(element.src, src)
+        const src = '/data/20170220_PAR.pdf'
         assert.equal(element.pages, undefined)
+        element.src = src
         var elementShadowRoot = element.shadowRoot
         assert.equal(elementShadowRoot.querySelector('#spinner').active, true)
       })
 
       it('error when loading a fake pdf', function (done) {
         var element = fixture('basic')
-        const src = '../data/fake.pdf'
-        element.src = src
         element.addEventListener('pdf-viewer-error', (evt) => {
           assert.equal(evt.detail.src, src)
           assert.equal(element.pages, undefined)
           assert.equal(element.page, undefined)
           done()
         })
+        const src = '/data/fake.pdf'
+        element.src = src
         assert.equal(element.src, src)
         var elementShadowRoot = element.shadowRoot
         assert.equal(elementShadowRoot.querySelector('#spinner').active, true)
       })
 
       it('loading a fat pdf', function (done) {
+        this.timeout(30000)
         var element = fixture('basic')
-        const src = '/data/html40.pdf'
-        element.src = src
         element.addEventListener('pdf-viewer-loaded', (evt) => {
           assert.equal(evt.detail.src, src)
           assert.equal(element.pages, 367)
           assert.equal(element.page, 1)
           done()
         })
+        const src = '/data/html40.pdf'
+        element.src = src
         assert.equal(element.src, src)
         var elementShadowRoot = element.shadowRoot
         assert.equal(elementShadowRoot.querySelector('#spinner').active, true)
