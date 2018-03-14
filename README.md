@@ -1,4 +1,7 @@
 [![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/telecomsante/pdf-viewer)
+![](https://img.shields.io/badge/polymer-2.x-blue.svg)
+![](https://img.shields.io/badge/licence-ISC-brightgreen.svg)
+
 
 # &lt;pdf-viewer&gt;
 
