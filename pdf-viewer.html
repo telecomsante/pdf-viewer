@@ -101,7 +101,9 @@ a pdf viewer component
           */
           PDFJS_workerSrc: {
             type: String,
-            value: '../pdfjs-dist/build/pdf.worker.min.js',
+            value: function() {
+              return this.importPath + '../pdfjs-dist/build/pdf.worker.min.js'
+            },
           },
 
           /**
