@@ -1,3 +1,8 @@
+## 2.1.1
+
+  - fix issue #7 : Page Number is resetting to 1 when loading a document
+  - use importPath to load the pdf worker script `pdf.worker.min.js`
+
 ## 2.1.0
 
  - update to PDFjs 2.0.426
