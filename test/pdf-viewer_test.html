@@ -86,6 +86,57 @@
         var elementShadowRoot = element.shadowRoot
         assert.equal(elementShadowRoot.querySelector('#spinner').active, true)
       })
+
+      it('define page before loading the document', function (done) {
+        this.timeout(30000)
+        let element = fixture('basic')
+        element.addEventListener('pdf-viewer-render', (evt) => {
+          assert.equal(element.pages, 24)
+          assert.equal(element.page, 4)
+          assert.equal(evt.detail.page, 4)
+          done()
+        })
+        const src = '/data/20170220_PAR.pdf'
+        assert.equal(element.pages, undefined)
+        element.src = src
+        element.page = 4
+        const elementShadowRoot = element.shadowRoot
+        assert.equal(elementShadowRoot.querySelector('#spinner').active, true)
+      })
+
+      it('if page number is bigger than pages', function (done) {
+        this.timeout(30000)
+        let element = fixture('basic')
+        element.addEventListener('pdf-viewer-render', (evt) => {
+          assert.equal(element.pages, 24)
+          assert.equal(element.page, 24)
+          assert.equal(evt.detail.page, 24)
+          done()
+        })
+        const src = '/data/20170220_PAR.pdf'
+        assert.equal(element.pages, undefined)
+        element.src = src
+        element.page = 25
+        const elementShadowRoot = element.shadowRoot
+        assert.equal(elementShadowRoot.querySelector('#spinner').active, true)
+      })
+
+      it('if page number is lower than 1', function (done) {
+        this.timeout(30000)
+        let element = fixture('basic')
+        element.addEventListener('pdf-viewer-render', (evt) => {
+          assert.equal(element.pages, 24)
+          assert.equal(element.page, 1)
+          assert.equal(evt.detail.page, 1)
+          done()
+        })
+        const src = '/data/20170220_PAR.pdf'
+        assert.equal(element.pages, undefined)
+        element.src = src
+        element.page = 0
+        const elementShadowRoot = element.shadowRoot
+        assert.equal(elementShadowRoot.querySelector('#spinner').active, true)
+      })
     })
 
     describe('pdf-viewer turning pages', () => {

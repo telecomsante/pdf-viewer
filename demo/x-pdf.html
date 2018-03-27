@@ -64,6 +64,13 @@
       static get is() {
         return 'x-pdf'
       }
+
+      static get properties() {
+        return {
+          page: { type: Number },
+        }
+      }
+
       fitWidth() {
         this.$.viewer.fitWidth()
       }
