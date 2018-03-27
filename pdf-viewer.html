@@ -278,7 +278,6 @@ a pdf viewer component
         }
         if (!newValue || newValue === oldValue) return
         this._loaded = false
-        this.page = null
         this._setPages(null)
 
         this.$.viewer2.hidden = true
@@ -302,7 +301,9 @@ a pdf viewer component
             }
             this._loaded = true
             this._setPages(pdf.numPages)
-            this.page = 1
+            if (this.page > pdf.numPages) this.page = pdf.numPages
+            if (this.page < 0) this.page = 1
+            if (!this.page) this.page = 1
             this.dispatchEvent(new CustomEvent('pdf-viewer-loaded', {
               detail: { src: src },
             }))
@@ -326,6 +327,7 @@ a pdf viewer component
 
       _pageChanged(newValue, oldValue) {
         if (!newValue && newValue !== 0) return
+        if (!this._loaded) return
         if (newValue > this.pages) this.page = this.pages
         if (newValue < 1) this.page = 1
         if (this._PDF.pdfInfo) this._drawPage()
@@ -444,7 +446,6 @@ a pdf viewer component
 
         return new Promise((resolve, reject) => {
           this._PDF.getPage(pg)
-            // .catch((e) => this._PDF.getPage(1))
             .then(page => {
               const viewport = page.getViewport(this._zoom)
               view.width = viewport.width
