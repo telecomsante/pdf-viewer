@@ -249,7 +249,7 @@ a pdf viewer component
 
       connectedCallback() {
         super.connectedCallback()
-        this.addEventListener('iron-resize', this._drawPage)
+        this.addEventListener('iron-resize', this._recenter)
       }
 
       /**
