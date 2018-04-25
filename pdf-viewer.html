@@ -523,7 +523,7 @@ a pdf viewer component
             break
           case 'track':
             tmp = getDiff(evt)
-            this.$.viewer.style.transform = `translate(${this._pos.x - tmp.x}px,${this._pos.y - tmp.y}px )`
+            this.$.viewer.style.transform = `translateX(${this._pos.x - tmp.x}px) translateY(${this._pos.y - tmp.y}px)`
             break
           case 'end':
             tmp = getDiff(evt)
@@ -555,7 +555,7 @@ a pdf viewer component
         if (rect.height < viewerRect.height && this._pos.y > 50) {
           this._pos.y = 50
         }
-        this.$.viewer.style.transform = `translate(${this._pos.x}px,${this._pos.y}px )`
+        this.$.viewer.style.transform = `translateX(${this._pos.x}px) translateY(${this._pos.y}px)`
       }
     }
 
