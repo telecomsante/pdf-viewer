@@ -2,13 +2,14 @@
   "name": "pdf-viewer",
   "description": "A pdf viewer component",
   "license": "LICENSE.md",
-  "version": "2.1.1",
+  "version": "2.2.0",
   "main": "pdf-viewer.html",
   "authors": [
     "Telecom Sante"
   ],
   "keywords": [
     "web-components",
+    "web-component",
     "polymer",
     "polymer2",
     "pdf"

@@ -102,7 +102,7 @@ a pdf viewer component
           */
           PDFJS_workerSrc: {
             type: String,
-            value: function() {
+            value: () => {
               return this.importPath + '../pdfjs-dist/build/pdf.worker.min.js'
             },
           },
@@ -249,7 +249,7 @@ a pdf viewer component
 
       connectedCallback() {
         super.connectedCallback()
-        this.addEventListener('iron-resize', this._drawPage)
+        this.addEventListener('iron-resize', this._recenter)
       }
 
       /**
@@ -393,13 +393,9 @@ a pdf viewer component
           .then(page => {
             let viewport = page.getViewport(1)
             let rect = this.$.container.getBoundingClientRect()
-            this._zoom = (rect.width - 20) / (this._views * viewport.width)
-            if (!this._firstRender) {
-              viewport = page.getViewport(this._zoom)
-              this._pos.x = (rect.width - this._views * viewport.width) / 2
-              this._pos.y = 10
-              this.$.viewer.style.transform = `translate(${this._pos.x}px,${this._pos.y}px )`
-            }
+            const zoom = (rect.width - 20) / (this._views * viewport.width)
+            if (zoom === this._zoom) { return Promise.resolve() }
+            this._zoom = zoom
             this._drawPage()
           })
       }
@@ -413,13 +409,9 @@ a pdf viewer component
           .then(page => {
             let viewport = page.getViewport(1)
             let rect = this.$.container.getBoundingClientRect()
-            this._zoom = Math.min((rect.width - 20) / (this._views * viewport.width), (rect.height - 20) / viewport.height)
-            if (!this._firstRender) {
-              viewport = page.getViewport(this._zoom)
-              this._pos.x = (rect.width - this._views * viewport.width) / 2
-              this._pos.y = (rect.height - viewport.height) / 2
-              this.$.viewer.style.transform = `translate(${this._pos.x}px,${this._pos.y}px )`
-            }
+            const zoom = Math.min((rect.width - 20) / (this._views * viewport.width), (rect.height - 20) / viewport.height)
+            if (zoom === this._zoom) { return Promise.resolve() }
+            this._zoom = zoom
             this.page = pageNum
             this._drawPage()
           })
@@ -523,7 +515,7 @@ a pdf viewer component
             break
           case 'track':
             tmp = getDiff(evt)
-            this.$.viewer.style.transform = `translate(${this._pos.x - tmp.x}px,${this._pos.y - tmp.y}px )`
+            this.$.viewer.style.transform = `translateX(${this._pos.x - tmp.x}px) translateY(${this._pos.y - tmp.y}px)`
             break
           case 'end':
             tmp = getDiff(evt)
@@ -555,7 +547,7 @@ a pdf viewer component
         if (rect.height < viewerRect.height && this._pos.y > 50) {
           this._pos.y = 50
         }
-        this.$.viewer.style.transform = `translate(${this._pos.x}px,${this._pos.y}px )`
+        this.$.viewer.style.transform = `translateX(${this._pos.x}px) translateY(${this._pos.y}px)`
       }
     }
 

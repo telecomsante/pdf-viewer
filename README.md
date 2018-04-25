@@ -11,7 +11,12 @@ the component is written using es6 syntax, and polymer 2.x.
 
 > __Nota :__ the pdfjs library uses XMLHttpRequest to load the pdf documents. So, you may encountered CORS problem, if you try to load a document from another origin. A solution could be to use a proxy to serve your documents, you could take advantage to use for example the project [CORS Anywhere](https://github.com/Rob--W/cors-anywhere).
 
-Demo and doc are available on https://telecomsante.github.io/pdf-viewer/
+Features
+ - Next/Previous page
+ - Zoom
+ - Polymer 2.x
+ - Dynamically change document without page reloading
+ - Works in IE11, IOS, Android (chrome)
 
 ![](demo.gif)
 
