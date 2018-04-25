@@ -1,3 +1,8 @@
+## 2.2.0
+
+  - fix issue #8 : On IE11, the document isn't centered into the page
+  - improves performance : redraws the page only when it's necessary
+
 ## 2.1.1
 
   - fix issue #7 : Page Number is resetting to 1 when loading a document
