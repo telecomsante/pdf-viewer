@@ -16,24 +16,29 @@
   <link rel="import" href="x-pdf.html">
 
   <style>
-    html, body {
-      height: 100%;
-      width: 100vw;
+    .fit {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      left: 0;
     }
 
-    body {
+    body {  
       padding:0;
       margin: 0;
       display: flex;
       flex-direction: column;
+      overflow: hidden;
     }
 
     x-pdf {
       flex:1;
+      overflow: hidden;
     }
   </style>
 </head>
-<body>
-  <x-pdf page=25></x-pdf>
+<body class="fit">
+  <x-pdf page=2></x-pdf>
 </body>
 </html>
