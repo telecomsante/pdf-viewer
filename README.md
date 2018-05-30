@@ -17,6 +17,7 @@ Features
  - Polymer 2.x
  - Dynamically change document without page reloading
  - Works in IE11, IOS, Android (chrome)
+ - Works in Chrome, Firefox, Safari
 
 ![](demo.gif)
 
