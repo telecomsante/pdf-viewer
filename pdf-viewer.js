@@ -29,7 +29,7 @@ import { mixinBehaviors } from '@polymer/polymer/lib/legacy/class.js'
  *
  * @customElement
  * @polymer
- * @demo demo/index.html
+ * @demo demo/mobile.html
  */
 class PdfViewer extends mixinBehaviors([IronResizableBehavior, GestureEventListeners], PolymerElement) {
   static get template() {
