@@ -1,5 +1,6 @@
-[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/telecomsante/pdf-viewer)
-![](https://img.shields.io/badge/polymer-2.x-blue.svg)
+[![Published on npm](https://img.shields.io/badge/npm-published-blue.svg)](https://www.npmjs.com/package/@telecomsante/pdf-viewer)
+![](https://img.shields.io/badge/polymer-3.x-blue.svg)
+![npm package](https://img.shields.io/badge/npm%20package-3.0.0.pre.1-green.svg)
 ![](https://img.shields.io/badge/licence-ISC-brightgreen.svg)
 
 
@@ -14,12 +15,12 @@ the component is written using es6 syntax, and polymer 2.x.
 Features
  - Next/Previous page
  - Zoom
- - Polymer 2.x
+ - Polymer 3.x
  - Dynamically change document without page reloading
  - Works in IE11, IOS, Android (chrome)
  - Works in Chrome, Firefox, Safari
 
-![](demo.gif)
+![][demo]
 
 Basic usage :
 
@@ -38,3 +39,5 @@ the file `bower_components/pdfjs-dist/build/pdf.worker.min.js` must be added to 
 If for some reasons, bower components are installed in another folder, be aware to pass as attribute `PDFJS_workerSrc` the full path to the `pdf.worker.min.js` file.
 
 The component is licensed under the [ISC License](LICENSE.md)
+
+[demo]: https://raw.githubusercontent.com/telecomsante/pdf-viewer/HEAD/demo.gif
