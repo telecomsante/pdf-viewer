@@ -8,8 +8,7 @@
   },
   "scripts": {
     "postinstall": "bower install",
-    "start": "polymer serve -H 0.0.0.0",
-    "start:es5": "polymer serve -H 0.0.0.0 --compile always",
+    "start": "polymer serve",
     "test": "polymer test -l chrome; polymer test -l safari; polymer test -l firefox",
     "lint": "npm run lint:javascript && polymer lint",
     "lint:polymer":"polymer lint",
