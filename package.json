@@ -27,7 +27,7 @@
     "lint": "npm run lint:javascript && polymer lint",
     "lint:polymer": "polymer lint",
     "lint:javascript": "eslint . --ext js,html --ignore-path .gitignore",
-    "doc": "polymer analyze > analysis.json"
+    "doc": "polymer analyze --npm --module-resolution node --sources pdf-viewer.js > analysis.json"
   },
   "bugs": {
     "url": "https://github.com/telecomsante/pdf-viewer/issues"
