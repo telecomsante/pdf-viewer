@@ -1,40 +1,76 @@
 {
-  "name": "pdf-viewer",
-  "version": "2.2.0",
+  "name": "@telecomsante/pdf-viewer",
   "description": "A pdf-viewer component",
-  "main": "index.js",
-  "directories": {
-    "test": "test"
-  },
-  "scripts": {
-    "postinstall": "bower install",
-    "start": "polymer serve",
-    "test": "polymer test -l chrome; polymer test -l safari; polymer test -l firefox",
-    "lint": "npm run lint:javascript && polymer lint",
-    "lint:polymer":"polymer lint",
-    "lint:javascript": "eslint . --ext js,html --ignore-path .gitignore",
-    "doc": "polymer analyze > analysis.json"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/telecomsante/pdf-viewer.git"
   },
-  "keywords": [],
-  "author": "",
+  "homepage": "https://github.com/telecomsante/pdf-viewer#readme",
+  "version": "3.0.0-pre.1",
+  "author": "Telecom Sante",
   "license": "ISC",
+  "main": "pdf-viewer.js",
+  "keywords": [
+    "polymer",
+    "webcomponent",
+    "pdf",
+    "viewer",
+    "telecomsante",
+    "tsante"
+  ],
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "start": "polymer serve",
+    "test": "polymer test -l chrome; polymer test -l safari; polymer test -l firefox",
+    "lint": "npm run lint:javascript && polymer lint",
+    "lint:polymer": "polymer lint",
+    "lint:javascript": "eslint . --ext js,html --ignore-path .gitignore",
+    "doc": "polymer analyze > analysis.json"
+  },
   "bugs": {
     "url": "https://github.com/telecomsante/pdf-viewer/issues"
   },
-  "homepage": "https://github.com/telecomsante/pdf-viewer#readme",
   "devDependencies": {
-    "bower": "^1.8.4",
     "eslint": "^4.19.1",
     "eslint-config-standard": "^11.0.0",
     "eslint-plugin-html": "^4.0.3",
-    "eslint-plugin-import": "^2.11.0",
+    "eslint-plugin-import": "^2.12.0",
     "eslint-plugin-node": "^6.0.1",
-    "eslint-plugin-promise": "^3.7.0",
+    "eslint-plugin-promise": "^3.8.0",
     "eslint-plugin-standard": "^3.1.0",
-    "polymer-cli": "^1.6.0"
+    "polymer-cli": "^1.7.2",
+    "wct-browser-legacy": "^1.0.1",
+    "@polymer/iron-component-page": "^3.0.0-pre.19",
+    "@polymer/iron-demo-helpers": "^3.0.0-pre.19",
+    "@polymer/iron-icons": "^3.0.0-pre.19",
+    "@webcomponents/webcomponentsjs": "^2.0.0",
+    "@polymer/iron-ajax": "^3.0.0-pre.19",
+    "@polymer/paper-tooltip": "^3.0.0-pre.19",
+    "@polymer/paper-fab": "^3.0.0-pre.19",
+    "@polymer/paper-dropdown-menu": "^3.0.0-pre.19",
+    "@polymer/paper-radio-group": "^3.0.0-pre.19",
+    "@polymer/paper-listbox": "^3.0.0-pre.19",
+    "@polymer/paper-item": "^3.0.0-pre.19"
+  },
+  "resolutions": {
+    "inherits": "2.0.3",
+    "samsam": "1.1.3",
+    "supports-color": "3.1.2",
+    "type-detect": "1.0.0"
+  },
+  "dependencies": {
+    "@polymer/iron-resizable-behavior": "^3.0.0-pre.19",
+    "@polymer/paper-button": "^3.0.0-pre.19",
+    "@polymer/paper-spinner": "^3.0.0-pre.19",
+    "@polymer/paper-styles": "^3.0.0-pre.19",
+    "@polymer/paper-toast": "^3.0.0-pre.19",
+    "@polymer/polymer": "^3.0.2",
+    "pdfjs-dist": "^2.0.489",
+    "web-animations-js": "^2.3.1"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
   }
 }
